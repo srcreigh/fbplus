@@ -4,15 +4,16 @@
   "name": "FB Plus",
   "permissions": [
     "tabs"
-  ],
-"icons": {
-	"16": "icon.png"
-},
+  ], 
+  "icons": {
+    "16": "icon.png"
+  },
   "description": "Facebook commands and keyboard shortcuts.",
   "version": "1.0",
   "omnibox": { "keyword" : "fb" },
   "background": {
     "persistent": false,
-    "scripts": ["background.js"]}
-
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'"
 }
