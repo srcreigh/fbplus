@@ -13,9 +13,7 @@ chrome.omnibox.onInputChanged.addListener(
 chrome.omnibox.onInputEntered.addListener(
   function(text) {
 
-
-
-  // redirects : Creates a one-dimensional array redirects
+  /*// redirects : Creates a one-dimensional array redirects
   var redirects = new Array();
 
   // numRedirects : Variable to store number of commands we are specifying.
@@ -25,13 +23,13 @@ chrome.omnibox.onInputEntered.addListener(
   // makeRedirect(command, link, alternate) gives the user access to:
   // command -> redirects to link
   // command data -> redirects to alternate
-  function makeRedirect (command, link, alternate) {
-    redirects[numRedirects] = new Array(3);
-    redirects[numRedirects][0] = command;
-    redirects[numRedirects][1] = link;
-    redirects[numRedirects][2] = alternate;
+  function makeRedirect (link, alternate) {
+    redirects[numRedirects] = new Array(2);
+    redirects[numRedirects][0] = link;
+    redirects[numRedirects][1] = alternate;
     numRedirects = numRedirects + 1;
-  }
+  }*/
+
 
   // Function to update a Chrome tab
   function updateChromeTab (address) {
@@ -65,27 +63,46 @@ chrome.omnibox.onInputEntered.addListener(
     data = text.substr(text.indexOf(" ") + 1);
   }
 
+  var commands = new Array();
+  var numCommands = 0;
+  function makeCommand (command, fun) {
+      commands[numCommands] = new Array(2);
+      commands[numCommands][0] = command;
+      commands[numCommands][1] = fun;
+      numCommands++;
+  }
+
+  function redirect (link, alternate) {
+      if(singleCmd) {
+            updateChromeTab (link);
+          } else {
+            updateChromeTab (alternate)
+          }
+  }
+
   // Database for redirect commands
-  makeRedirect("home", "http://www.facebook.com", undefined);
-  makeRedirect("pics", "http://www.facebook.com/me/photos", "http://www.facebook.com/"+data+"/photos");
-  makeRedirect("events", "https://www.facebook.com/events/list", undefined);
+  makeCommand("home", function() {redirect("http://www.facebook.com", undefined)});
+  makeCommand("pics", function() {redirect("http://www.facebook.com/me/photos", "http://www.facebook.com/"+data+"/photos")});
+  makeCommand("events", function() {redirect("https://www.facebook.com/events/list", undefined)});
+  makeCommand("msg", function() {redirect("https://www.facebook.com/messages/", "https://www.facebook.com/messages/"+data)});
+  makeCommand("groups", function() {redirect("https://www.facebook.com/bookmarks/groups", undefined)});
+  makeCommand("apps", function() {redirect("https://www.facebook.com/bookmarks/apps", undefined)});
+  makeCommand("friends", function() {redirect("https://www.facebook.com/me/friends", "https://www.facebook.com/"+data+"/friends")});
+  makeCommand("help", function() {alert("Hello I'm no help")});
+  
 
   // The main function we use to check for redirect commands
   // It goes through each entry in redirects and checks if the input command is the 
   // 'command' value of the redirect, if it is then applies 'link' or 'alternate'
-  function checkRedirects () {
-    for (var j = 0; j < numRedirects; j++) {
-       if (cmd == redirects[j][0]) {
-          if(singleCmd) {
-            updateChromeTab (redirects[j][1]);
-          } else {
-            updateChromeTab (redirects[j][2])
-          }
+  function checkCommands () {
+    for (var j = 0; j < numCommands; j++) {
+       if (cmd == commands[j][0]) {
+          commands[j][1]();
           break;
       }
     }
   }
 
-  checkRedirects();
+  checkCommands();
 
 });
