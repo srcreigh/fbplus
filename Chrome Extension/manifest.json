@@ -4,6 +4,9 @@
   "name": "FB Plus",
   "description": "Facebook commands and keyboard shortcuts.",
   "version": "1.0",
+"icons": {
+	"16": "icon.png"
+},
 "omnibox": { "keyword" : "fb" },
   "background": {
     "persistent": false,
