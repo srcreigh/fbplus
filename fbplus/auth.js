@@ -35,7 +35,6 @@ function auth() {
           jsonp: 'callback',
           dataType: 'jsonp',
           success: function (result) {
-            console.log(result);
             user_data = result;
           }
         });
