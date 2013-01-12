@@ -1,10 +1,7 @@
 // I am so proud of this. --- Shane
 
-var user_data;
-
 // local storage
 if (localStorage['init'] === undefined) {
-  localStorage['init'] = true;
   auth();
 }
 
@@ -42,8 +39,7 @@ function auth() {
           jsonp: 'callback',
           dataType: 'jsonp',
           success: function (result) {
-            user_data = result;
-            console.log(user_data);
+            localStorage['init'] = JSON.stringify(result);
           }
         });
       }

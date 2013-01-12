@@ -1,3 +1,11 @@
+chrome.omnibox.onInputChanged.addListener(
+  function(text, suggest) {
+    console.log('inputChanged: ' + text);
+    suggest([
+      {content: text + " one", description: "the first one"},
+      {content: text + " number two", description: "the second entry"}
+    ]);
+  });
 
 /* This is for after they press ENTER. 'text' is the string they send */
 chrome.omnibox.onInputEntered.addListener(
@@ -34,9 +42,9 @@ chrome.omnibox.onInputEntered.addListener(
     cmd = text.substr(0, text.indexOf(" ")); // otherwise cmd is the first word up to a space character
     data = text.substr(text.indexOf(" ") + 1);
   }
-
-    var obj = user_data;
-    
+  
+  obj = JSON.parse(localStorage['init']);
+  console.log(obj);
 
  // If data is a name (i.e., FirstName LastName, convert to ID ########) 
  function ensureId (name) {
