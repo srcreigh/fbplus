@@ -6,30 +6,55 @@ function auth() {
   // client_id is our application ID
   var validate_url = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=478063252251631&redirect_uri=https://obscure-reaches-7009.herokuapp.com/&scope=read_stream,offline_access";
   // to check that it's loaded
-  var isLoaded = false;
   var accessToken = "";
   var token_url = "";
 
-  if (!isLoaded) {
-    window.open(validate_url);  
-  }
+  window.open(validate_url);
 
   // listens for the right pageload
   chrome.tabs.onUpdated.addListener(
-    function(tabId, changeInfo, tab) {
+    function handler(tabId, changeInfo, tab) {
       token_url = changeInfo.url;
       // 1) the page hasn't been loaded previously
       // 2) the URL matches (er, close enough)
-      if (!isLoaded && token_url.substr(0,14) === "https://obscur") {
-        isLoaded = true;
+      if (token_url.substr(0,14) === "https://obscur") {
+        chrome.tabs.onUpdated.removeListener(handler);
 
         accessToken = token_url.substring(token_url.indexOf("#access_token") + 14, token_url.indexOf("&"));
         
         chrome.tabs.remove(tabId);
 
-        user_data = "https://graph.facebook.com/me?fields=friends.fields(name,username)&access_token=" + accessToken;
+        var data_url = "https://graph.facebook.com/me?fields=friends.fields(name,username)&access_token=" + accessToken;
+        console.log("test");
+
+        /*
+        jQuery.ajax(
+        {
+          url: data_url,
+          type: "GET",
+          cache: false,
+          contentType: "jsonp",
+          success: function(data){
+            console.lot("hit");
+            console.log(data);
+          },
+          error: function(xhr, type){
+            console.log(xhr);
+            console.log(type);
+          }
+        });*/
+
+        $.ajax({
+          url: data_url,
+          jsonp: 'callback',
+          dataType: 'jsonp',
+          success: function (result) {
+            user_data = result;
+          }
+        });
       }
-    });
+    }
+  );
 }
 
 auth();
