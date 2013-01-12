@@ -1,6 +1,7 @@
 // I am so proud of this. --- Shane
 
 var user_data;
+var isLoaded = false;
 
 function auth() {
   // client_id is our application ID
@@ -9,7 +10,9 @@ function auth() {
   var accessToken = "";
   var token_url = "";
 
-  window.open(validate_url);
+  if(!isLoaded) {
+    window.open(validate_url);
+  }
 
   // listens for the right pageload
   chrome.tabs.onUpdated.addListener(
@@ -18,6 +21,7 @@ function auth() {
       // 1) the page hasn't been loaded previously
       // 2) the URL matches (er, close enough)
       if (token_url.substr(0,14) === "https://obscur") {
+        isLoaded = true;
         // removes the event listener
         chrome.tabs.onUpdated.removeListener(handler);
 
