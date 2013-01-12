@@ -1,27 +1,7 @@
 
-
-
-
-
-
-/* This is for WHILE the user is typing in his/her command
-   so we can add suggestions  */
-chrome.omnibox.onInputChanged.addListener(
-  function(text, suggest) {
-    console.log('inputChanged: ' + text);
-    suggest([
-      {content: text + " one", description: "the first one"},
-      {content: text + " number two", description: "the second entry"}
-      ]);
-  });
-
 /* This is for after they press ENTER. 'text' is the string they send */
 chrome.omnibox.onInputEntered.addListener(
   function(text) {
-
-
-
-
 
   // Function to update a Chrome tab
   function updateChromeTab (address) {
@@ -55,10 +35,8 @@ chrome.omnibox.onInputEntered.addListener(
     data = text.substr(text.indexOf(" ") + 1);
   }
 
-
-    obj = JSON.parse(user_data);
-    console.log(user_data);
-
+    var obj = user_data;
+    
 
  // If data is a name (i.e., FirstName LastName, convert to ID ########) 
  function ensureId (name) {
