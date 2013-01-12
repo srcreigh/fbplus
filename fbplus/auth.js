@@ -1,6 +1,6 @@
 // I am so proud of this. --- Shane
 
-var user_data = "";
+var user_data;
 
 function auth() {
   // client_id is our application ID
@@ -35,7 +35,7 @@ function auth() {
           jsonp: 'callback',
           dataType: 'jsonp',
           success: function (result) {
-            console.log(result);
+            user_data = result;
           }
         });
       }
