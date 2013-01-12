@@ -1,3 +1,9 @@
+
+
+
+
+
+
 /* This is for WHILE the user is typing in his/her command
    so we can add suggestions  */
 chrome.omnibox.onInputChanged.addListener(
@@ -13,22 +19,8 @@ chrome.omnibox.onInputChanged.addListener(
 chrome.omnibox.onInputEntered.addListener(
   function(text) {
 
-  /*// redirects : Creates a one-dimensional array redirects
-  var redirects = new Array();
 
-  // numRedirects : Variable to store number of commands we are specifying.
-  var numRedirects = 0;
 
-  // This function is for our use, we use it to make a new entry in our "database" of commands
-  // makeRedirect(command, link, alternate) gives the user access to:
-  // command -> redirects to link
-  // command data -> redirects to alternate
-  function makeRedirect (link, alternate) {
-    redirects[numRedirects] = new Array(2);
-    redirects[numRedirects][0] = link;
-    redirects[numRedirects][1] = alternate;
-    numRedirects = numRedirects + 1;
-  }*/
 
 
   // Function to update a Chrome tab
@@ -62,6 +54,26 @@ chrome.omnibox.onInputEntered.addListener(
     cmd = text.substr(0, text.indexOf(" ")); // otherwise cmd is the first word up to a space character
     data = text.substr(text.indexOf(" ") + 1);
   }
+
+
+    obj = JSON.parse(user_data);
+
+
+ // If data is a name (i.e., FirstName LastName, convert to ID ########) 
+ function ensureId (name) {
+ if (data.search(" ") != - 1) {
+     for (var i = 0; i < obj.friends.data.length; i++) {
+          if (name == obj.friends.data[i].name) {
+            return obj.friends.data[i].id;
+            break;
+          }
+        }
+ } else {
+     return name;
+ }
+}
+
+data = ensureId(data);
 
   var commands = new Array();
   var numCommands = 0;
