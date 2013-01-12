@@ -15,5 +15,12 @@
     "persistent": false,
     "page": "background.html"
   },
+<<<<<<< HEAD
+=======
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon":"icon.png"
+  },
+>>>>>>> Some small changes to merge our files
   "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'"
 }
