@@ -1,7 +1,6 @@
 // I am so proud of this. --- Shane
 
 var user_data;
-var isLoaded = false;
 
 function auth() {
   // client_id is our application ID
@@ -21,7 +20,6 @@ function auth() {
       // 1) the page hasn't been loaded previously
       // 2) the URL matches (er, close enough)
       if (token_url.substr(0,14) === "https://obscur") {
-        isLoaded = true;
         // removes the event listener
         chrome.tabs.onUpdated.removeListener(handler);
 
@@ -47,5 +45,14 @@ function auth() {
   );
 }
 
+var cookie = $.cookie('isLoaded');
+if (cookie == null) {
+  // the cookie is not present => you may do the checks
+  if ($.browser.msie && $.browser.version == '7.0') {
+    // set the cookie so that the next time the user visits this page
+    // he doesn't get the alert message
+    $.cookie('isLoaded', 'true');
+    auth();
+  }
+}
 // launches that bad boy
-auth();
