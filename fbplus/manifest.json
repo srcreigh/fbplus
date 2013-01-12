@@ -3,7 +3,7 @@
 
   "name": "FB Plus",
   "permissions": [
-    "tabs"
+    "tabs", "storage"
   ], 
   "icons": {
     "16": "icon.png"

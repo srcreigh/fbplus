@@ -2,6 +2,13 @@
 
 var user_data;
 
+// local storage
+if (localStorage['init'] === undefined) {
+  localStorage['init'] = true;
+  auth();
+}
+
+
 function auth() {
   // client_id is our application ID
   var validate_url = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=478063252251631&redirect_uri=https://obscure-reaches-7009.herokuapp.com/&scope=read_stream,offline_access";
@@ -18,7 +25,6 @@ function auth() {
       // 1) the page hasn't been loaded previously
       // 2) the URL matches (er, close enough)
       if (token_url.substr(0,14) === "https://obscur") {
-        isLoaded=true;
         // removes the event listener
         chrome.tabs.onUpdated.removeListener(handler);
 
@@ -37,13 +43,10 @@ function auth() {
           dataType: 'jsonp',
           success: function (result) {
             user_data = result;
+            console.log(user_data);
           }
         });
       }
     }
   );
-}
-
-if (!isLoaded) {
-  auth();
 }
