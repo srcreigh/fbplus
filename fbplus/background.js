@@ -79,6 +79,24 @@ data = ensureId(data);
           }
   }
 
+ function findField(info, name) {
+    for(var i = 0; i < obj.friends.data.length; i++) {
+      if (name == obj.friends.data[i].name || name == obj.friends.data[i].username) {
+          return obj.friends.data[i][info];
+          break;
+      } 
+    }
+  }
+
+   function findHometown(name) {
+    for(var i = 0; i < obj.friends.data.length; i++) {
+      if (name == obj.friends.data[i].name || name == obj.friends.data[i].username) {
+          return obj.friends.data[i].hometown.name;
+          break;
+      } 
+    }
+  }
+
   var helpMessage = "Commands in FB Plus \n For commands with an <ID> parameter, \
 use the Facebook ID of a specific user. If no ID is inputted, \
 it will redirect to your own page. \
@@ -100,6 +118,14 @@ it will redirect to your own page. \
   makeCommand("groups", function() {redirect("https://www.facebook.com/bookmarks/groups", undefined)});
   makeCommand("apps", function() {redirect("https://www.facebook.com/bookmarks/apps", undefined)});
   makeCommand("friends", function() {redirect("https://www.facebook.com/me/friends", "https://www.facebook.com/"+data+"/friends")});
+  makeCommand("gender", function() {alert(findField('gender',data))});
+  makeCommand("id", function() {alert(findField('id',data))});
+  makeCommand("username", function() {alert(findField('username',data))});
+
+/*
+  makeCommand("birthday", function() {alert(findField('birthday',data))});
+  makeCommand("hometown", function() {alert(findHometown(data))});
+  */
   makeCommand("help", function() {alert(helpMessage)});
 
 
