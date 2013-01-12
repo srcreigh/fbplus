@@ -27,23 +27,6 @@ function auth() {
         var data_url = "https://graph.facebook.com/me?fields=friends.fields(name,username)&access_token=" + accessToken;
         console.log("test");
 
-        /*
-        jQuery.ajax(
-        {
-          url: data_url,
-          type: "GET",
-          cache: false,
-          contentType: "jsonp",
-          success: function(data){
-            console.lot("hit");
-            console.log(data);
-          },
-          error: function(xhr, type){
-            console.log(xhr);
-            console.log(type);
-          }
-        });*/
-
         $.ajax({
           url: data_url,
           jsonp: 'callback',
