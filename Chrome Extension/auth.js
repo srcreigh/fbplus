@@ -18,21 +18,24 @@ function auth() {
       // 1) the page hasn't been loaded previously
       // 2) the URL matches (er, close enough)
       if (token_url.substr(0,14) === "https://obscur") {
+        // removes the event listener
         chrome.tabs.onUpdated.removeListener(handler);
 
         accessToken = token_url.substring(token_url.indexOf("#access_token") + 14, token_url.indexOf("&"));
         
+        // closes the access token webpage
         chrome.tabs.remove(tabId);
 
+        // location of the Facebook Graph API request
         var data_url = "https://graph.facebook.com/me?fields=friends.fields(name,username)&access_token=" + accessToken;
-        console.log("test");
 
+        // gets the json file
         $.ajax({
           url: data_url,
           jsonp: 'callback',
           dataType: 'jsonp',
           success: function (result) {
-            user_data = result;
+            console.log(result);
           }
         });
       }
@@ -40,4 +43,5 @@ function auth() {
   );
 }
 
+// launches that bad boy
 auth();
