@@ -14,17 +14,43 @@ chrome.omnibox.onInputEntered.addListener(
   function(text) {
 
   var cmd; // variable that will become the first command. e.g., "msg Liam" => cmd = msg
+  var data;
+  var singleCmd = new Boolean();
 
-  if (text.search(" ") == -1) { // If there is no space character in the string they send, this returns -1
-       cmd = text;                         // so we assume the whole string is a command
-  } else {
-    cmd = text.substr(0, text.indexOf(" ")); // otherwise cmd is the first word up to a space character
+  if (text.search(" ") == -1) {
+    singleCmd = true;
+    } else {
+    singleCmd = false;
   }
 
+  if (singleCmd) { 
+    cmd = text;                         
+  } else {
+    cmd = text.substr(0, text.indexOf(" ")); // otherwise cmd is the first word up to a space character
+    data = text.substr(text.indexOf(" ") + 1);
+  }
+
+// The 'home' command
   if (cmd == "home") {
-    chrome.tabs.getSelected( undefined, function(tab) {
+        chrome.tabs.getSelected( undefined, function(tab) {
         chrome.tabs.update(tab.id, {url: "http://www.facebook.com/"}, undefined);
         window.close(); 
-      });}
+  });}
+
+  // The 'pics' command
+  if (cmd == "pics") {
+    if(singleCmd) {
+      chrome.tabs.getSelected( undefined, function(tab) {
+        chrome.tabs.update(tab.id, {url: "http://www.facebook.com/me/photos"}, undefined);
+        window.close(); });
+    } else {
+       chrome.tabs.getSelected( undefined, function(tab) {
+        chrome.tabs.update(tab.id, {url: "http://www.facebook.com/"+data+"/photos"}, undefined);
+        window.close();  });
+    }
+  }
+
+
+
 
 });
