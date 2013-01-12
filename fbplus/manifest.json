@@ -19,6 +19,5 @@
     "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
-
-  "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://graph.facebook.com; object-src 'self'"
 }

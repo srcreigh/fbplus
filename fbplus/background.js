@@ -57,6 +57,7 @@ chrome.omnibox.onInputEntered.addListener(
 
 
     obj = JSON.parse(user_data);
+    console.log(user_data);
 
 
  // If data is a name (i.e., FirstName LastName, convert to ID ########) 
