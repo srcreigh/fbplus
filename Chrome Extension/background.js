@@ -80,6 +80,19 @@ chrome.omnibox.onInputEntered.addListener(
           }
   }
 
+  var helpMessage = "Commands in FB Plus \n For commands with an <ID> parameter, \
+use the Facebook ID of a specific user. If no ID is inputted, \
+it will redirect to your own page. \
+                    \n home - News Feed \
+                    \n pics <ID> - Photos \
+                    \n events - Events \
+                    \n msg <ID> - Messages \
+                    \n groups - Groups \
+                    \n apps - Applications \
+                    \n friends <ID> - Friends";
+
+
+
   // Database for redirect commands
   makeCommand("home", function() {redirect("http://www.facebook.com", undefined)});
   makeCommand("pics", function() {redirect("http://www.facebook.com/me/photos", "http://www.facebook.com/"+data+"/photos")});
@@ -88,8 +101,8 @@ chrome.omnibox.onInputEntered.addListener(
   makeCommand("groups", function() {redirect("https://www.facebook.com/bookmarks/groups", undefined)});
   makeCommand("apps", function() {redirect("https://www.facebook.com/bookmarks/apps", undefined)});
   makeCommand("friends", function() {redirect("https://www.facebook.com/me/friends", "https://www.facebook.com/"+data+"/friends")});
-  makeCommand("help", function() {alert("Hello I'm no help")});
-  
+  makeCommand("help", function() {alert(helpMessage)});
+
 
   // The main function we use to check for redirect commands
   // It goes through each entry in redirects and checks if the input command is the 

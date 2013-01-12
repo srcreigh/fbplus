@@ -15,5 +15,10 @@
     "persistent": false,
     "page": "background.html"
   },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+
   "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'"
 }
