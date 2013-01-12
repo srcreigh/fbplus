@@ -43,7 +43,7 @@ chrome.omnibox.onInputEntered.addListener(
  if (data.search(" ") != - 1) {
      for (var i = 0; i < obj.friends.data.length; i++) {
           if (name == obj.friends.data[i].name) {
-            return obj.friends.data[i].id;
+            return obj.friends.data[i].username;
             break;
           }
         }
