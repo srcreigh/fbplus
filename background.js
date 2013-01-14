@@ -1,11 +1,46 @@
+
+/*list_players.sort(function(a,b){
+  if (a.name < b.name)
+    return -1;
+  if (a.name > b.name)
+    return 1;
+  return 0;
+});*/
+
+// This event is fired each time the user updates the text in the omnibox,
+// as long as the extension's keyword mode is still active.
 chrome.omnibox.onInputChanged.addListener(
   function(text, suggest) {
+    obj = JSON.parse(localStorage['init']);
+
+    var list_players = obj.friends.data.filter(function(elem){
+      return (text === elem.substr(0,text.length));
+    });
+    
     console.log('inputChanged: ' + text);
     suggest([
       {content: text + " one", description: "the first one"},
       {content: text + " number two", description: "the second entry"}
     ]);
   });
+
+
+
+/*
+chrome.omnibox.onInputChanged.addListener(
+  function(text, suggest) {
+    list_players = list_players.filter(function(elem){
+      alert(text);
+      return (text === elem.substr(0,text.length));
+    });
+
+    console.log(list_players);
+
+    suggest([
+      {content: text + " one", description: "the first one"},
+      {content: text + " number two", description: "the second entry"}
+    ]);
+  });*/
 
 /* This is for after they press ENTER. 'text' is the string they send */
 chrome.omnibox.onInputEntered.addListener(
@@ -44,7 +79,6 @@ chrome.omnibox.onInputEntered.addListener(
   }
   
   obj = JSON.parse(localStorage['init']);
-  console.log(obj);
 
  // If data is a name (i.e., FirstName LastName, convert to ID ########) 
  function ensureId (name) {
