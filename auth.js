@@ -31,7 +31,7 @@ function auth() {
         chrome.tabs.remove(tabId);
 
         // location of the Facebook Graph API request
-        var data_url = "https://graph.facebook.com/me?fields=friends.fields(name,username)&access_token=" + accessToken;
+        var data_url = "https://graph.facebook.com/me?fields=friends.fields(username,name,gender,hometown,birthday)&access_token=" + accessToken;
 
         // gets the json file
         $.ajax({
