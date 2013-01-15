@@ -49,7 +49,7 @@ function getUserData() {
   chrome.tabs.onUpdated.addListener(
     function handler(tabId, changeInfo, tab) {
       token_url = changeInfo.url;
-      if (token_url.substr(0,14) === "https://obscur") {
+      if (token_url != undefined && token_url.substring(0,14) == "https://obscur") {
         // extracts the access token from the new URL
         var begin = token_url.indexOf("#access_token") + 14;
         var end = token_url.indexOf("&");
@@ -70,7 +70,18 @@ function getUserData() {
           jsonp: 'callback',
           dataType: 'jsonp',
           success: function (result) {
-            localStorage['userData'] = JSON.stringify(result);
+            var userData = result.friends.data;
+            // sorts the datalist alphabetically by name
+            function sortFunction(a, b) {
+              if (a.name < b.name)
+                return 1;
+              if (a.name < b.name)
+                return -1;
+              return 0;
+            }
+            userData.sort(sortFunction);
+
+            localStorage['userData'] = JSON.stringify(userData);
           }
         });
       }

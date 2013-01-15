@@ -40,14 +40,14 @@ chrome.omnibox.onInputEntered.addListener(
     data = text.substr(text.indexOf(" ") + 1);
   }
   
-  obj = JSON.parse(localStorage['userData']);
+  userData = JSON.parse(localStorage['userData']);
 
  // If data is a name (i.e., FirstName LastName, convert to ID ########) 
  function ensureId (name) {
  if (data.search(" ") != - 1) {
-     for (var i = 0; i < obj.friends.data.length; i++) {
-          if (name == obj.friends.data[i].name) {
-            return obj.friends.data[i].username;
+     for (var i = 0; i < userData.length; i++) {
+          if (name == userData[i].name) {
+            return userData[i].username;
             break;
           }
         }
@@ -76,18 +76,18 @@ data = ensureId(data);
   }
 
  function findField(info, name) {
-    for(var i = 0; i < obj.friends.data.length; i++) {
-      if (name == obj.friends.data[i].name || name == obj.friends.data[i].username) {
-          return obj.friends.data[i][info];
+    for(var i = 0; i < userData.length; i++) {
+      if (name == userData[i].name || name == userData[i].username) {
+          return userData[i][info];
           break;
       } 
     }
   }
 
    function findHometown(name) {
-    for(var i = 0; i < obj.friends.data.length; i++) {
-      if (name == obj.friends.data[i].name || name == obj.friends.data[i].username) {
-          return obj.friends.data[i].hometown.name;
+    for(var i = 0; i < userData.length; i++) {
+      if (name == userData[i].name || name == userData[i].username) {
+          return userData[i].hometown.name;
           break;
       } 
     }
