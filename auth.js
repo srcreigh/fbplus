@@ -4,26 +4,42 @@
  *
  */
 
-// External check for init
-if (localStorage['init'] === undefined) {
-  auth();
+/* checkUserData(): Void -> Void
+ *                  PRE: true
+ *                  POST: calls getUserData
+ *
+ * Check that the userData isn't loaded, and if it isn't, then loads it using
+ * the getUserData function.
+ *
+ */
+function checkUserData() {
+  if (localStorage['userData'] == undefined) {
+    getUserData();
+  }
 }
 
-/*
- * auth(): Void -> Void
- *         PRE: localStorage['init'] is undefined
- *         POST: localStorage['init'] contains a JSON object with the user's friends' data
+
+
+/* getUserData(): Void -> Void
+ *                PRE: true
+ *                POST: localStorage['init'] contains a JSON object with the 
+ *                      user's friends' data
  *
- * This function uses Facebook's URL authorization system to retrieve an access token and query
- * the Facebook Graph API to get data.
+ * This function uses Facebook's URL authorization system to retrieve an 
+ * access token and query the Facebook Graph API to get data.
  *
  */
 
-function auth() {
-  // This URL requires out application ID, our redirection URL, and other options. 
-  // NOTE: if you need to query with extra privacy settings, edit the part at the end with the
-  // "scope" parameter.
-  var validate_url = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=478063252251631&redirect_uri=https://obscure-reaches-7009.herokuapp.com/&scope=read_stream,offline_access";
+function getUserData() {
+  /* This URL requires out application ID, our redirection URL, and other 
+   * options. 
+   * 
+   * NOTE: if you need to query with extra privacy settings, edit the "scope" 
+   * variable. Check the Facebook Graph Explorer to figure out what privary
+   * requests you need to make.
+   */
+  var scope = "read_stream,offline_access";
+  var validate_url = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=478063252251631&redirect_uri=https://obscure-reaches-7009.herokuapp.com/&scope=" + scope;
   
   var accessToken = "";
   var token_url = "";
@@ -34,16 +50,18 @@ function auth() {
     function handler(tabId, changeInfo, tab) {
       token_url = changeInfo.url;
       if (token_url.substr(0,14) === "https://obscur") {
-        // removes the event listener
-        chrome.tabs.onUpdated.removeListener(handler);
+        // extracts the access token from the new URL
+        var begin = token_url.indexOf("#access_token") + 14;
+        var end = token_url.indexOf("&");
+        accessToken = token_url.substring(begin, end);
 
-        // This extracts the access token from the new URL
-        accessToken = token_url.substring(token_url.indexOf("#access_token") + 14, token_url.indexOf("&"));
-        
         // closes the access token webpage
         chrome.tabs.remove(tabId);
 
-        // location of the Facebook Graph API request
+        /* Facebook Graph API request
+         * NOTE: this is where one would add fields to increase the amount of
+         * data to retrieve.
+         */
         var data_url = "https://graph.facebook.com/me?fields=friends.fields(username,name,gender,hometown,birthday)&access_token=" + accessToken;
 
         // Queries the Facebook Graph API and stores it in localStorage
@@ -52,10 +70,13 @@ function auth() {
           jsonp: 'callback',
           dataType: 'jsonp',
           success: function (result) {
-            localStorage['init'] = JSON.stringify(result);
+            localStorage['userData'] = JSON.stringify(result);
           }
         });
       }
     }
   );
 }
+
+
+checkUserData();
