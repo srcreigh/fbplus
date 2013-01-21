@@ -96,8 +96,10 @@ data = ensureId(data);
   var helpMessage = "Commands in FB Plus \n For commands with an <ID> parameter, \
 use the Facebook ID of a specific user. If no ID is inputted, \
 it will redirect to your own page. \
+                    \n \
                     \n home - News Feed \
                     \n pics <ID> - Photos \
+                    \n timelines <ID> - Timeline \
                     \n events - Events \
                     \n msg <ID> - Messages \
                     \n groups - Groups \
