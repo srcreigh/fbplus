@@ -113,6 +113,7 @@ it will redirect to your own page. \
   makeCommand("msg", function() {redirect("https://www.facebook.com/messages/", "https://www.facebook.com/messages/"+data)});
   makeCommand("groups", function() {redirect("https://www.facebook.com/bookmarks/groups", undefined)});
   makeCommand("apps", function() {redirect("https://www.facebook.com/bookmarks/apps", undefined)});
+  makeCommand("timeline", function() {redirect("https://www.facebook.com/me/friends", "https://www.facebook.com/"+data)});
   makeCommand("friends", function() {redirect("https://www.facebook.com/me/friends", "https://www.facebook.com/"+data+"/friends")});
   makeCommand("gender", function() {alert(findField('gender',data))});
   makeCommand("id", function() {alert(findField('id',data))});
