@@ -34,16 +34,16 @@ function buildResultsList(text) {
     return [];
 
   if (indexOfSpace == -1) {
-    results = commands.filter(function(a) {
-      if (a.length <= text)
+    results = commands.filter(function(cmd) {
+      if (cmd.length < text)
         return false;
-      if (a.substr(0,text.length) == text)
+      if (cmd.substr(0,text.length) == text)
         return true;
       return false;
     });
 
     return results.map(function(a) {
-      return {content: a, description: "look, now you can " + a + "!!!!"};
+      return {content: a, description: "command: " + a};
     });
   }
 
@@ -54,11 +54,9 @@ function buildResultsList(text) {
 
     results = results.filter(function(a) {
       if (a.name.length <= nameText) {
-        console.log(a.name + ' is too short for ' + nameText);
         return false;
       }
       if (a.name.substr(0,nameText.length) == nameText) {
-        console.log(a.name.substr(0,nameText.length) + ' and ' + nameText + ' match');
         return true;
       }
       return false;
