@@ -96,9 +96,16 @@ data = ensureId(data);
   var helpMessage = "Commands in FB Plus \n For commands with a <name> parameter, \
 use the Facebook name of a specific friend! If no name is inputted, \
 it will redirect to your own page. \
+<<<<<<< HEAD
                     \n help - Display This Alert! \
                     \n home - News Feed \
                     \n pics <name> - Photos \
+=======
+                    \n \
+                    \n home - News Feed \
+                    \n pics <ID> - Photos \
+                    \n timelines <ID> - Timeline \
+>>>>>>> 47a92d21a8792bda730679fcdeafb32fe1263107
                     \n events - Events \
                     \n msg <name> - Messages \
                     \n groups - Groups \
@@ -117,6 +124,7 @@ it will redirect to your own page. \
   makeCommand("msg", function() {redirect("https://www.facebook.com/messages/", "https://www.facebook.com/messages/"+data)});
   makeCommand("groups", function() {redirect("https://www.facebook.com/bookmarks/groups", undefined)});
   makeCommand("apps", function() {redirect("https://www.facebook.com/bookmarks/apps", undefined)});
+  makeCommand("timeline", function() {redirect("https://www.facebook.com/me/friends", "https://www.facebook.com/"+data)});
   makeCommand("friends", function() {redirect("https://www.facebook.com/me/friends", "https://www.facebook.com/"+data+"/friends")});
   makeCommand("gender", function() {alert(findField('gender',data))});
   makeCommand("id", function() {alert(findField('id',data))});
