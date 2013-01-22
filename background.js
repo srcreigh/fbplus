@@ -93,19 +93,15 @@ data = ensureId(data);
     }
   }
 
-  var helpMessage = "Commands in FB Plus \n For commands with a <name> parameter, \
+var helpMessage = "Commands in FB Plus \n For commands with a <name> parameter, \
 use the Facebook name of a specific friend! If no name is inputted, \
 it will redirect to your own page. \
-<<<<<<< HEAD
                     \n help - Display This Alert! \
                     \n home - News Feed \
                     \n pics <name> - Photos \
-=======
-                    \n \
                     \n home - News Feed \
                     \n pics <ID> - Photos \
                     \n timelines <ID> - Timeline \
->>>>>>> 47a92d21a8792bda730679fcdeafb32fe1263107
                     \n events - Events \
                     \n msg <name> - Messages \
                     \n groups - Groups \
