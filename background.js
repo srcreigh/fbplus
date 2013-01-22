@@ -1,5 +1,5 @@
 /* background.js
- * author: Liam Horne
+ * author: Liam Horne, Shane Creighton-Young
  * project: fbplus
  *
  */
@@ -93,16 +93,20 @@ data = ensureId(data);
     }
   }
 
-  var helpMessage = "Commands in FB Plus \n For commands with an <ID> parameter, \
-use the Facebook ID of a specific user. If no ID is inputted, \
+  var helpMessage = "Commands in FB Plus \n For commands with a <name> parameter, \
+use the Facebook name of a specific friend! If no name is inputted, \
 it will redirect to your own page. \
+                    \n help - Display This Alert! \
                     \n home - News Feed \
-                    \n pics <ID> - Photos \
+                    \n pics <name> - Photos \
                     \n events - Events \
-                    \n msg <ID> - Messages \
+                    \n msg <name> - Messages \
                     \n groups - Groups \
                     \n apps - Applications \
-                    \n friends <ID> - Friends";
+                    \n friends <name> - Friends \
+                    \n gender <name> - Alert with gender \
+                    \n id <name> - Alert with id \
+                    \n username <name> - Alert with name";
 
 
 
