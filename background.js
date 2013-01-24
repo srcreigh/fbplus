@@ -1,3 +1,4 @@
+
 /* background.js
  * author: Liam Horne, Shane Creighton-Young
  * project: fbplus
@@ -115,6 +116,7 @@ it will redirect to your own page. \
 
   // Database for redirect commands
   makeCommand("home", function() {redirect("http://www.facebook.com", undefined)});
+  makeCommand("search", function() {redirect("https://www.facebook.com/search/results.php?q=", "https://www.facebook.com/search/results.php?q=" + data)});
   makeCommand("pics", function() {redirect("http://www.facebook.com/me/photos", "http://www.facebook.com/"+data+"/photos")});
   makeCommand("events", function() {redirect("https://www.facebook.com/events/list", undefined)});
   makeCommand("msg", function() {redirect("https://www.facebook.com/messages/", "https://www.facebook.com/messages/"+data)});
