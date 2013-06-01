@@ -1,5 +1,5 @@
 /* background.js
- * author: Liam Horne
+ * author: Liam Horne, Nima Vaziri
  * project: fbplus
  *
  */
