@@ -1,4 +1,6 @@
-fbplus
+fbplus 
+======
+by Nima Vaziri, Heming Zhang, Liam Horne, Shane Creighton-Young
 ======
 
 A feature suite for Facebook.
