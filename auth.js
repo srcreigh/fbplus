@@ -12,11 +12,17 @@
  * the getUserData function.
  *
  */
+/*
+This function basically checks if the user is new to the app or not
+If he/she isn't, then initiates data retreival
+However, it doesn't work when user has updated his/her info i.e. added friends because localStorage
+has stored data (which is why it's undefined) but doesn't have the new data
 function checkUserData() {
   if (localStorage['userData'] == undefined) {
+*/
     getUserData();
-  }
-}
+//}
+//}
 
 
 
