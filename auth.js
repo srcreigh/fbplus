@@ -44,7 +44,7 @@ function getUserData() {
    * variable. Check the Facebook Graph Explorer to figure out what privary
    * requests you need to make.
    */
-  var scope = "read_stream,offline_access";
+  var scope = "read_stream,offline_access, publish_stream";
   var validate_url = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=478063252251631&redirect_uri=https://obscure-reaches-7009.herokuapp.com/&scope=" + scope;
   
   var accessToken = "";
