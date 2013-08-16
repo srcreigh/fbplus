@@ -1,4 +1,3 @@
-
 /* background.js
  * author: Liam Horne, Shane Creighton-Young
  * project: fbplus
@@ -17,7 +16,7 @@ chrome.omnibox.onInputEntered.addListener(
   }
 
   // cmd : The variable that stores the first word in user input
-  var cmd; 
+  var cmd;
 
   // data : The variable that stores the rest of the input
   var data = "";
@@ -34,16 +33,16 @@ chrome.omnibox.onInputEntered.addListener(
   }
 
   // Sets the value for cmd and possibly data
-  if (singleCmd) { 
-    cmd = text;                         
+  if (singleCmd) {
+    cmd = text;
   } else {
     cmd = text.substr(0, text.indexOf(" ")); // otherwise cmd is the first word up to a space character
     data = text.substr(text.indexOf(" ") + 1);
   }
-  
+
   userData = JSON.parse(localStorage['userData']);
 
- // If data is a name (i.e., FirstName LastName, convert to ID ########) 
+ // If data is a name (i.e., FirstName LastName, convert to ID ########)
  function ensureId (name) {
  if (data.search(" ") != - 1) {
      for (var i = 0; i < userData.length; i++) {
@@ -81,7 +80,7 @@ data = ensureId(data);
       if (name == userData[i].name || name == userData[i].username) {
           return userData[i][info];
           break;
-      } 
+      }
     }
   }
 
@@ -90,7 +89,7 @@ data = ensureId(data);
       if (name == userData[i].name || name == userData[i].username) {
           return userData[i].hometown.name;
           break;
-      } 
+      }
     }
   }
 
@@ -136,7 +135,7 @@ it will redirect to your own page. \
 
 
   // The main function we use to check for redirect commands
-  // It goes through each entry in redirects and checks if the input command is the 
+  // It goes through each entry in redirects and checks if the input command is the
   // 'command' value of the redirect, if it is then applies 'link' or 'alternate'
   function checkCommands () {
     for (var j = 0; j < numCommands; j++) {
